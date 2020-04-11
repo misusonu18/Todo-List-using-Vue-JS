@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TodoList</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-auto">
+                <div class="text-center">
+                    <h1>TodoList</h1>
+                </div>
+                <div id="todo">
+                    <div class="form-group">
+                        <button class="btn btn-info" v-on:click='addInput'>Add TodoList</button>
+                    </div>
+
+                    <div class="form-group">
+                        <input v-if="seen" type="text" v-model='todotext' class="form-control">
+                    </div>
+
+                    <div>
+                        <ul class="list-group" v-if="todolist">
+                            <li class="list-group-item" v-for="todo in todoitem">
+                                {{ todo.text }}
+                            </li>
+                        </ul>
+                    </div>  
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="/js/app.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
