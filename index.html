@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TodoList</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+        body , .list-group{
+            background-color: black;
+            color: red;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -15,19 +21,27 @@
                 </div>
                 <div id="todo">
                     <div class="form-group">
-                        <button class="btn btn-info" v-on:click='addInput'>Add TodoList</button>
+                        <button class="btn btn-info" v-if="addtodo" v-on:click='addInput'>Add TodoList</button>
+                        <button class="btn btn-warning" v-if="edittodo" v-on:click='editInput'>Edit TodoList</button>
                     </div>
 
                     <div class="form-group">
-                        <input v-if="seen" type="text" v-model='todotext' class="form-control" placeholder="Enter TodoList">
+                        <input v-if="seen" type="text" v-model='todoText' class="form-control" placeholder="Enter TodoList">
                     </div>
 
                     <div>
-                        <ul class="list-group" v-if="todolist">
-                            <li class="list-group-item" v-for="todo in todoitem">
-                                {{ todo.text }}
+                        <ul class="list-group" v-if="todoItem.length">
+                            <p><h4>Display</h4></p>
+                            <li class="list-group-item" v-for="(todo,index) in todoItem">
+                                <label>
+                                    <input type="checkbox" v-bind:id="index" v-bind:value="index" v-model="selectedTodo" id="todoitem">
+                                {{ todo }}</label>
                             </li>
                         </ul>
+                        <div class="form-group mt-3" v-if="selectedTodo.length > 0">
+                            <button class="btn btn-warning" v-on:click="editItem">Edit</button>
+                            <button class="btn btn-danger" v-on:click="removeItem">Remove</button>
+                        </div>
                     </div>  
                 </div>
             </div>
