@@ -1,21 +1,50 @@
 var todolist = new Vue({
     el: "#todo",
     data: {
-        todoitem: Array(),
+        todoItem: ['heelo','hii','hh'],
         seen: "",
-        todotext: "",
-        todolist: "",   
+        todoText: "",
+        selectedTodo: [], 
+        addtodo: true, 
+        edittodo: false,
     },
 
     methods: {
-        addInput: function(){
+        addInput: function() { 
             if (this.seen == true) {
-                this.todolist = true;
-                this.todoitem.push({text: this.todotext});
-                this.todotext = "";
+                if (this.todoText.length > 0) {
+                    this.todoItem.push(this.todoText);
+                    this.todoText = "";
+                }
             }
             else
                 this.seen = true;
+        },
+
+        removeItem: function() {
+            if (this.selectedTodo.length) {
+                this.todoItem.splice(this.selectedTodo,1)
+            }
+        },
+
+        editItem: function() {
+            if (this.selectedTodo.length == 1) {
+                this.seen = true;
+                this.todoText = this.todoItem[this.selectedTodo].toString();
+                this.todoItem.splice(this.selectedTodo,1);
+                this.addtodo = false;
+                this.edittodo = true;
+                console.log(this.selectedTodo);
+            }
+        },
+
+        editInput: function(){
+            this.todoItem.push(this.todoText);
+            this.todoText = "";
+            this.addtodo = true;
+            this.edittodo = false;
+            this.seen = false;
+            this.selectedTodo = [];
         }
     }   
 });
